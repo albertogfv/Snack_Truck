@@ -12,11 +12,14 @@ import com.albertogfv.snack_truck.ui.orderList.OrderActivity
     entities = [OrderItem::class],
     version = 1
 )
-
 abstract class OrderDatabase : RoomDatabase() {
 
     abstract fun getOrderDao(): OrderDao
 
+    //override fun onCreate(){
+     //   super .onCreate()
+    //}
+    /*
     companion object {
         @Volatile
         private var instance: OrderDatabase? = null
@@ -37,4 +40,6 @@ abstract class OrderDatabase : RoomDatabase() {
                 OrderDatabase::class.java, "OrderDb.db"
             ).build()
     }
+    */
+
 }
