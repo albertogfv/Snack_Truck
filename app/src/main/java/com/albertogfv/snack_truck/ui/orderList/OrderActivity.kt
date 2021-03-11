@@ -39,22 +39,44 @@ class OrderActivity : AppCompatActivity() {
             adapter.items = it
             adapter.notifyDataSetChanged()
         })
+/*
+        viewModel.getNoVegOrderItems().observe(this, Observer {
+            adapter.items = it
+            adapter.notifyDataSetChanged()
+        })
+
+        viewModel.getVegOrderItems().observe(this, Observer {
+            adapter.items = it
+            adapter.notifyDataSetChanged()
+        })
+*/
+
+
+        val names = viewModel.getNameOrderItems()
+        Log.d("list", "${names.value.toString()}")
+
         val sendDialog = AlertDialog.Builder(this)
             .setTitle("Send Order")
-            .setMessage("Is this your final order?")
+            .setMessage("listItems")
             .setPositiveButton("Send") {
                     _, _ ->
                 Toast.makeText(this, "order sent", Toast.LENGTH_SHORT).show()
+
             }
-            .setNegativeButton("Send") {
+            .setNegativeButton("Cancel") {
                     _, _ ->
                 Toast.makeText(this, "order cancel", Toast.LENGTH_SHORT).show()
             }.create()
         fab.setOnClickListener {
+
             sendDialog.show()
+            /*
+            viewModel.getVegOrderItems().observe(this, Observer {
+                adapter.items = it
+                adapter.notifyDataSetChanged()
+            })
+            */
         }
-
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -72,10 +94,6 @@ class OrderActivity : AppCompatActivity() {
                 }).show()
 
         }
-
         return super.onOptionsItemSelected(item)
-
     }
-
-
 }

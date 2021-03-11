@@ -3,7 +3,6 @@ package com.albertogfv.snack_truck.data.repositories
 
 
 import com.albertogfv.snack_truck.data.db.OrderDao
-import com.albertogfv.snack_truck.data.db.entities.OrderDatabase
 import com.albertogfv.snack_truck.data.db.entities.OrderItem
 import javax.inject.Inject
 
@@ -22,4 +21,8 @@ class OrderRepository @Inject constructor(
     fun getNoVegOrderItems() = orderDao.getAllNonVegOrderItems()
 
     fun getSendOrderItems()  = orderDao.getAllSendOrderItems()
+
+    fun getNameOrderItems() = orderDao.getAllNameItems()
+
+    fun setToZero() = orderDao.setAmounttoZero()
 }

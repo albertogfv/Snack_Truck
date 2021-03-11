@@ -16,14 +16,14 @@ class AddOrderItemDialog(context: Context, var addDialogListener: AddDialogListe
 
         tvAdd.setOnClickListener{
             val name = etName.text.toString()
-            val amount = etAmount.text.toString()
+            val isVeg = cbVeg.isChecked
 
-            if(name.isEmpty() || amount.isEmpty()){
+            if(name.isEmpty()){
                 Toast.makeText(context, "Please enter all the information", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            val item = OrderItem(name, true ,amount.toInt())
+            val item = OrderItem(name, true ,0)
             addDialogListener.onAddButtonClicked(item)
             dismiss()
         }

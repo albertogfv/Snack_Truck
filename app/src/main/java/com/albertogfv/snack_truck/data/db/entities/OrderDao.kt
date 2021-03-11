@@ -25,6 +25,9 @@ interface OrderDao {
     @Query("Select * FROM order_items WHERE amount > 0 ")
     fun getAllSendOrderItems(): LiveData<List<OrderItem>>
 
+    @Query("Select item_name FROM order_items")
+    fun getAllNameItems(): LiveData<List<String>>
 
-
+    @Query("UPDATE order_items SET amount = 0 WHERE amount > 0")
+    fun setAmounttoZero()
 }
