@@ -1,8 +1,10 @@
-package com.albertogfv.snack_truck.data.db.entities
+package com.albertogfv.snack_truck.data.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.albertogfv.snack_truck.data.db.entities.OrderItem
+
+@Dao
 interface OrderDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -22,5 +24,7 @@ interface OrderDao {
 
     @Query("Select * FROM order_items WHERE amount > 0 ")
     fun getAllSendOrderItems(): LiveData<List<OrderItem>>
+
+
 
 }
