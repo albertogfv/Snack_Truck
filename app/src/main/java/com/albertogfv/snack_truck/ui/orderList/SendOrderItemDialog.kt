@@ -31,6 +31,7 @@ class SendOrderItemDialog(item: List<OrderItem>): DialogFragment(){
         rootView.btnSend.setOnClickListener {
             dismiss()
             //this would have been a possible location to send the order request to a food truck
+            //by making a restful api request
         }
         return super.onCreateView(inflater, container, savedInstanceState)
     }

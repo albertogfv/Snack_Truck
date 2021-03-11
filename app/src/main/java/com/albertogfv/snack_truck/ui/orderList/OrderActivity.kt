@@ -35,6 +35,18 @@ class OrderActivity : AppCompatActivity() {
         rvOrderItems.layoutManager = LinearLayoutManager(this)
         rvOrderItems.adapter = adapter
 
+        //fill the menu with initial items
+        viewModel.insert(OrderItem("fries", true, 0))
+        viewModel.insert(OrderItem("Veg burger", true, 0))
+        viewModel.insert(OrderItem("carrots", true, 0))
+        viewModel.insert(OrderItem("apple", true, 0))
+        viewModel.insert(OrderItem("banana", true, 0))
+        viewModel.insert(OrderItem("milkshake", true, 0))
+        viewModel.insert(OrderItem("cheeseburger", false, 0))
+        viewModel.insert(OrderItem("hamburger", false, 0))
+        viewModel.insert(OrderItem("hot dog", false, 0))
+
+
         viewModel.getAllOrderItems().observe(this, Observer {
             adapter.items = it
             adapter.notifyDataSetChanged()
@@ -46,7 +58,7 @@ class OrderActivity : AppCompatActivity() {
                     _, _ ->
                 Toast.makeText(this, "order sent", Toast.LENGTH_SHORT).show()
             }
-            .setNegativeButton("Send") {
+            .setNegativeButton("Cancel") {
                     _, _ ->
                 Toast.makeText(this, "order cancel", Toast.LENGTH_SHORT).show()
             }.create()
