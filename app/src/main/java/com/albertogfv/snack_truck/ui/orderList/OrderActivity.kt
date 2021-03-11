@@ -3,6 +3,7 @@ package com.albertogfv.snack_truck.ui.orderList
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,35 +21,32 @@ class OrderActivity : AppCompatActivity() {
 
     @Inject
     lateinit var orderDao: OrderDao
+    private val viewModel: OrderViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_order)
         Log.d("orderdao", "ORDERDAO: ${orderDao.hashCode()}")
 
+        val adapter = OrderItemAdapter(listOf(), viewModel)
 
-    /*
-        //val viewModel = ViewModelProviders.of(this, factory).get(OrderViewModel::class.java)
+        rvOrderItems.layoutManager = LinearLayoutManager(this)
+        rvOrderItems.adapter = adapter
 
-        //val adapter = OrderItemAdapter(listOf(), viewModel)
-
-        //rvOrderItems.layoutManager = LinearLayoutManager(this)
-        //rvOrderItems.adapter = adapter
-
-        //viewModel.getAllOrderItems().observe(this, Observer {
-         //   adapter.items = it
-          //  adapter.notifyDataSetChanged()
-       // })
+        viewModel.getAllOrderItems().observe(this, Observer {
+            adapter.items = it
+            adapter.notifyDataSetChanged()
+        })
 
         fab.setOnClickListener {
             AddOrderItemDialog(this,
                 object : AddDialogListener {
                     override fun onAddButtonClicked(item: OrderItem) {
-                      //  viewModel.upsert(item)
+                        viewModel.insert(item)
                     }
                 }).show()
         }
-        */
+
 
     }
 }
