@@ -7,6 +7,6 @@ import com.albertogfv.snack_truck.R
 class OrderActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_order)
     }
 }
