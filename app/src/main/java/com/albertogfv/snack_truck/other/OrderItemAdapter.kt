@@ -39,14 +39,14 @@ class OrderItemAdapter(
 
         holder.itemView.ivPlus.setOnClickListener {
             curOrderItem.amount++
-            viewModel.upsert(curOrderItem
+            viewModel.insert(curOrderItem
             )
         }
 
         holder.itemView.ivMinus.setOnClickListener {
             if(curOrderItem.amount > 0) {
                 curOrderItem.amount--
-                viewModel.upsert(curOrderItem)
+                viewModel.insert(curOrderItem)
             }
         }
 

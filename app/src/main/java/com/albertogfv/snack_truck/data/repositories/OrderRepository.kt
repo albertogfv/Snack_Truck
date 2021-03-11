@@ -2,21 +2,24 @@ package com.albertogfv.snack_truck.data.repositories
 
 
 
+import com.albertogfv.snack_truck.data.db.OrderDao
 import com.albertogfv.snack_truck.data.db.entities.OrderDatabase
 import com.albertogfv.snack_truck.data.db.entities.OrderItem
+import javax.inject.Inject
 
-class OrderRepository(
-    private val db: OrderDatabase
+class OrderRepository @Inject constructor(
+    val orderDao: OrderDao
+
 ) {
-    suspend fun upsert(item: OrderItem) = db.getOrderDao().upsert(item)
+    suspend fun insertOrder(item: OrderItem) = orderDao.insertOrder(item)
 
-    suspend fun delete(item: OrderItem) = db.getOrderDao().delete(item)
+    suspend fun deleteOrder(item: OrderItem) = orderDao.deleteOrder(item)
 
-    fun getAllOrderItems() = db.getOrderDao().getAllOrderItems()
+    fun getAllOrderItems() = orderDao.getAllOrderItems()
 
-    fun getVegOrderItems() = db.getOrderDao().getAllVegOrderItems()
+    fun getVegOrderItems() = orderDao.getAllVegOrderItems()
 
-    fun getNoVegOrderItems() = db.getOrderDao().getAllNonVegOrderItems()
+    fun getNoVegOrderItems() = orderDao.getAllNonVegOrderItems()
 
-    fun getSendOrderItems()  = db.getOrderDao().getAllSendOrderItems()
+    fun getSendOrderItems()  = orderDao.getAllSendOrderItems()
 }

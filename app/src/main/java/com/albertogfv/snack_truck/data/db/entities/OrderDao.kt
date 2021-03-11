@@ -8,10 +8,10 @@ import com.albertogfv.snack_truck.data.db.entities.OrderItem
 interface OrderDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun upsert(item: OrderItem)
+    suspend fun insertOrder(item: OrderItem)
 
     @Delete
-    suspend fun delete(item: OrderItem)
+    suspend fun deleteOrder(item: OrderItem)
 
     @Query("Select * FROM order_items")
     fun getAllOrderItems(): LiveData<List<OrderItem>>

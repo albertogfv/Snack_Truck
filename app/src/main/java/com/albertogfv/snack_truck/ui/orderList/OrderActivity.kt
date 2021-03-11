@@ -12,9 +12,7 @@ import com.albertogfv.snack_truck.data.db.entities.OrderItem
 import com.albertogfv.snack_truck.other.OrderItemAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_order.*
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.kodein
-import org.kodein.di.generic.instance
+
 import javax.inject.Inject
 
 @AndroidEntryPoint
