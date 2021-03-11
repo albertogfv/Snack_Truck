@@ -21,7 +21,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class OrderActivity : AppCompatActivity() {
 
-    //use dagger to get acces to dependencies
     @Inject
     lateinit var orderDao: OrderDao
     private val viewModel: OrderViewModel by viewModels()
@@ -33,64 +32,31 @@ class OrderActivity : AppCompatActivity() {
 
         val adapter = OrderItemAdapter(listOf(), viewModel)
 
-        //populate recycler view to the adapter
         rvOrderItems.layoutManager = LinearLayoutManager(this)
         rvOrderItems.adapter = adapter
 
-        //populate recycler view
         viewModel.getAllOrderItems().observe(this, Observer {
             adapter.items = it
             adapter.notifyDataSetChanged()
         })
-
-        //stub messages for slecting veg or no veg items
-/*
-        viewModel.getNoVegOrderItems().observe(this, Observer {
-            adapter.items = it
-            adapter.notifyDataSetChanged()
-        })
-
-        viewModel.getVegOrderItems().observe(this, Observer {
-            adapter.items = it
-            adapter.notifyDataSetChanged()
-        })
-*/
-
-        //an attempt data from viewmodel to send to the dialog box
-        val names = viewModel.getNameOrderItems()
-        Log.d("list", "${names.value.toString()}")
-
-        //create dialog bog for the send order message
         val sendDialog = AlertDialog.Builder(this)
             .setTitle("Send Order")
-            .setMessage("listItems")
+            .setMessage("Is this your final order?")
             .setPositiveButton("Send") {
                     _, _ ->
                 Toast.makeText(this, "order sent", Toast.LENGTH_SHORT).show()
-
             }
-            .setNegativeButton("Cancel") {
+            .setNegativeButton("Send") {
                     _, _ ->
                 Toast.makeText(this, "order cancel", Toast.LENGTH_SHORT).show()
             }.create()
-
-        //send order botton
         fab.setOnClickListener {
-
             sendDialog.show()
-
-            //possible location to reset the amounts to zero after order submitted
-            /*
-            viewModel.setToZero.observe(this, Observer {
-                adapter.items = it
-                adapter.notifyDataSetChanged()
-            })
-            */
         }
+
+
     }
 
-
-    //code for adding the taskbar menu button
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.nav_menu, menu)
         return true
@@ -98,7 +64,6 @@ class OrderActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
       when (item.itemId){
-          //open the dialog box to add items to the menu
             R.id.nav_newSnack -> AddOrderItemDialog(this,
                     object : AddDialogListener {
                     override fun onAddButtonClicked(item: OrderItem) {
@@ -107,6 +72,10 @@ class OrderActivity : AppCompatActivity() {
                 }).show()
 
         }
+
         return super.onOptionsItemSelected(item)
+
     }
+
+
 }

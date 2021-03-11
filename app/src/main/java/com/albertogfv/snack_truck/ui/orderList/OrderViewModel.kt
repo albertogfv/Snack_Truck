@@ -1,12 +1,14 @@
 package com.albertogfv.snack_truck.ui.orderList
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
+
+import androidx.hilt.lifecycle.ViewModelInject
 import com.albertogfv.snack_truck.data.db.entities.OrderItem
 import com.albertogfv.snack_truck.data.repositories.OrderRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 
 class OrderViewModel @ViewModelInject constructor(
@@ -28,8 +30,4 @@ class OrderViewModel @ViewModelInject constructor(
     fun getNoVegOrderItems() = repository.getNoVegOrderItems()
 
     fun getSendOrderItems() = repository.getSendOrderItems()
-
-    fun getNameOrderItems() = repository.getNameOrderItems()
-
-    fun setToZero() = repository.setToZero()
 }
